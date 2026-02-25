@@ -7,7 +7,11 @@ authors = [
     { name = "Martin H. Skjelvareid", email = "martin.hansen.skjelvareid@gmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.4.2",
+    "requests>=2.32.5",
+]
 
 [project.scripts]
 tide-tool-demo = "tide_tool_demo:main"
