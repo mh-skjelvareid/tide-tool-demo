@@ -4,11 +4,12 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 authors = [
-    { name = "Martin H. Skjelvareid", email = "martin.hansen.skjelvareid@gmail.com" }
+    { name = "Martin H. Skjelvareid"}
 ]
 requires-python = ">=3.13"
 dependencies = [
     "matplotlib>=3.10.8",
+    "mkdocs-material>=9.7.3",
     "numpy>=2.4.2",
     "requests>=2.32.5",
 ]
