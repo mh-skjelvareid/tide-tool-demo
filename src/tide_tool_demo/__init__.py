@@ -1,2 +1,2 @@
 def main() -> None:
-    print("Hello from tide-tool-demo!")
+    print("__init__.py: Hello from tide-tool-demo!")
