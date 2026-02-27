@@ -1,0 +1,11 @@
+<tide>
+<locationdata>
+<location name="Stavanger" code="SVG" latitude="58.974339" longitude="5.730121" delay="0" factor="1.00" obsname="Stavanger" obscode="SVG" descr="Tidvatn frå Stavanger"/>
+<reflevelcode>CD</reflevelcode>
+<data type="prediction" unit="cm" qualityFlag="1" qualityClass="Quality High" qualityDescription="Data av høg kvalitet: Det er verifisert mot målingar at data stemmer med fysiske forhold.">
+<waterlevel value="73.1" time="2026-02-27T06:07:00+01:00" flag="high"/>
+<waterlevel value="55.7" time="2026-02-27T13:10:00+01:00" flag="low"/>
+<waterlevel value="74.2" time="2026-02-27T19:09:00+01:00" flag="high"/>
+</data>
+</locationdata>
+</tide>
