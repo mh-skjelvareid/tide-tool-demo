@@ -74,3 +74,27 @@ This creates
 
 - docs/index.md 
 - mkdocs.yml
+
+Documentation is written as MarkDown files in the docs subfolder. The mkdocs.yml file contains metadata (instructions on how documentation is built). Add the following to mkdocs.yml:
+
+    plugins:
+    - mkdocstrings:
+        handlers:
+            python:
+            options:
+                docstring_style: numpy
+                docstring_options:
+                ignore_init_summary: true
+                members_order: source
+                show_source: true
+                show_signature: true
+
+Let's create a file that automatically extracts docstring information and formats it as an API reference. First, open stc/tide_tool_demo/\__init__.py and add the following:
+
+    from .tide_tool_demo import TideApiCaller, TideInfo
+    \__all__ = ["TideInfo", "TideApiCaller"]
+
+This exposes the API for the package. Then create docs/api.md and add the followiong line:
+
+    ::: tide_tool_demo
+
