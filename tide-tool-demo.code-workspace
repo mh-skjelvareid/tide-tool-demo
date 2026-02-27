@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {},
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Python: Module",
+                "type": "debugpy",
+                "request": "launch",
+                "module": "tide_tool_demo",
+                "justMyCode": true
+            }
+        ]
+    }
+}
