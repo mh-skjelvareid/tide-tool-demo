@@ -63,3 +63,14 @@ This installs the dependencies into the virtual environment. The pyproject.toml 
     ]
 
 and a file called uv.lock is created. The file contains the details of the exact versions of all dependencies (including those installed indirectly via other dependencies). 
+
+
+## Documentation with mkdocs
+Create a new setup for MkDocs documentation with
+    
+    mkdocs new .
+
+This creates 
+
+- docs/index.md 
+- mkdocs.yml
