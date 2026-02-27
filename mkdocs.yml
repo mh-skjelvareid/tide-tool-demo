@@ -1,0 +1,25 @@
+# mkdocs.yml
+site_name: Tide checking tool documentation
+
+theme:
+  name: "material"
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy
+            docstring_options:
+              ignore_init_summary: true
+            members_order: source
+            heading_level: 2
+            show_root_heading: false
+            show_source: true
+            show_signature: true
+
+nav:
+  - Docs: index.md
+  - API Reference: api.md
+
+
