@@ -1,2 +1,3 @@
-def main() -> None:
-    print("__init__.py: Hello from tide-tool-demo!")
+from .tide_tool_demo import TideApiCaller, TideInfo
+
+__all__ = ["TideInfo", "TideApiCaller"]
