@@ -13,8 +13,10 @@ plugins:
             docstring_options:
               ignore_init_summary: true
             members_order: source
-            show_source: true
+            show_source: false
             show_signature: true
+            show_signature_annotations: true    
+            separate_signature: true
 
 nav:
   - Docs: index.md
