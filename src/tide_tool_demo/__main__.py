@@ -5,5 +5,5 @@ longitude = 18.9841
 tide_info = TideInfo(latitude, longitude)
 
 print("Tide Tool Demo - Example Usage")
-print("Next high and low tide information for Tromsø, Norway:")
+print("Tide information for Tromsø, Norway:")
 print(tide_info.high_low_tide_str())
