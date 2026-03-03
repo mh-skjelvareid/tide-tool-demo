@@ -18,9 +18,9 @@ class TideInfo:
         """Initialize the TideInfo class with location and plotting parameters."""
         self.latitude = latitude
         self.longitude = longitude
-        self.api_caller = TideApiCaller()
         self.figure_size = figure_size
         self.time_string_format = "%Y-%m-%dT%H:%M"
+        self.api_caller = TideApiCaller()
 
     def _plot_tide(self, timestamps: NDArray, water_levels: NDArray):
         """Plot the tide levels over time using Matplotlib."""
@@ -38,7 +38,6 @@ class TideInfo:
 
     def plot_tide_time_series(self, start_time: str | None, end_time: str | None):
         """Fetch tide time series data and plot it."""
-
         # Set default start and end times if not provided
         if start_time is None:
             start_time = datetime.now().strftime(self.time_string_format)
@@ -53,7 +52,8 @@ class TideInfo:
         )
         self._plot_tide(timestamps, water_levels)
 
-    def print_high_low_tides(self):
+    def high_low_tide_str(self) -> str:
+        """Return a string with the next high and low tide times."""
         start_time = datetime.now().strftime(self.time_string_format)
         end_time = (datetime.now() + timedelta(days=1)).strftime(
             self.time_string_format
@@ -61,8 +61,11 @@ class TideInfo:
         next_high_tide, next_low_tide = self.api_caller.get_high_low_tides(
             self.latitude, self.longitude, start_time, end_time
         )
-        print(f"Next high tide: {next_high_tide}")
-        print(f"Next low tide: {next_low_tide}")
+        # TODO: sort based on which comes first, format better
+        return_str = f"Next high tide: {next_high_tide} \n"
+        return_str += f"Next low tide: {next_low_tide}"
+
+        return return_str
 
 
 class TideApiCaller:
@@ -77,8 +80,8 @@ class TideApiCaller:
         start_time: str | None,
         end_time: str | None,
         datatype: Literal["pre", "tab"] = "pre",
-    ):
-        """_summary_
+    ) -> str:
+        """Request tide information from the API.
 
         Parameters
         ----------
@@ -96,8 +99,8 @@ class TideApiCaller:
 
         Returns
         -------
-        _type_
-            _description_
+        str
+            The raw XML response from the tide API.
         """
         url = self.base_url
         params = {
@@ -122,6 +125,7 @@ class TideApiCaller:
         """Parse the XML data to extract timestamps and water levels."""
         xml_root = ET.fromstring(xml_data)
         waterlevels = xml_root.findall(".//data/waterlevel")
+
         time = []
         levels = []
         for waterlevel in waterlevels:
@@ -136,7 +140,9 @@ class TideApiCaller:
 
         return time, levels
 
-    def _parse_xml_high_low_tides(self, xml_data: str):
+    def _parse_xml_high_low_tides(
+        self, xml_data: str
+    ) -> tuple[tuple[str, float] | None, tuple[str, float] | None]:
         """Parse the XML data to extract the next high and low tide information."""
         xml_root = ET.fromstring(xml_data)
         waterlevels = xml_root.findall(".//data/waterlevel")
@@ -186,8 +192,8 @@ class TideApiCaller:
 
 if __name__ == "__main__":
     # Example usage
-    latitude = 59.91  # Oslo, Norway
-    longitude = 10.75
+    latitude = 69.6498  # Tromsø, Norway
+    longitude = 18.9841
     tide_info = TideInfo(latitude, longitude)
     tide_info.plot_tide_time_series(None, None)
-    tide_info.print_high_low_tides()
+    print(tide_info.high_low_tide_str())
