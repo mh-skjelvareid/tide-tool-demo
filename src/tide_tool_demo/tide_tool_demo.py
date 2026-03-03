@@ -37,7 +37,16 @@ class TideInfo:
         plt.show()
 
     def plot_tide_time_series(self, start_time: str | None, end_time: str | None):
-        """Fetch tide time series data and plot it."""
+        """Fetch tide time series data and plot it.
+
+        Arguments
+        ----------
+        start_time : str | None
+            Start time for the tide data (in ISO format). If None, defaults to current time.
+        end_time : str | None
+            End time for the tide data (in ISO format). If None, defaults to 24 hours from current time.
+
+        """
         # Set default start and end times if not provided
         if start_time is None:
             start_time = datetime.now().strftime(self.time_string_format)
@@ -53,7 +62,14 @@ class TideInfo:
         self._plot_tide(timestamps, water_levels)
 
     def high_low_tide_str(self) -> str:
-        """Return a string with the next high and low tide times."""
+        """Return a string with the next high and low tide times.
+
+        Returns
+        -------
+        str
+            A formatted string containing the next high and low tide information.
+
+        """
         start_time = datetime.now().strftime(self.time_string_format)
         end_time = (datetime.now() + timedelta(days=1)).strftime(
             self.time_string_format
@@ -169,7 +185,25 @@ class TideApiCaller:
         start_time: str | None,
         end_time: str | None,
     ) -> tuple[NDArray[np.datetime64], NDArray[np.float64]]:
-        """Fetch tide time series data and return timestamps and water levels."""
+        """Fetch tide time series data and return timestamps and water levels.
+
+        Arguments
+        ----------
+        latitude : float
+            Latitude of the location for which to fetch tide information.
+        longitude : float
+            Longitude of the location for which to fetch tide information.
+        start_time : str | None
+            Start time for the tide data (in ISO format).
+        end_time : str | None
+            End time for the tide data (in ISO format).
+
+        Returns
+        -------
+        tuple[NDArray[np.datetime64], NDArray[np.float64]]
+            A tuple containing an array of timestamps and an array of corresponding water levels.
+
+        """
         xml_data = self._request_tide_info(
             latitude, longitude, start_time, end_time, datatype="pre"
         )
@@ -182,7 +216,26 @@ class TideApiCaller:
         start_time: str | None,
         end_time: str | None,
     ) -> tuple[tuple[str, float] | None, tuple[str, float] | None]:
-        """Fetch high and low tide information and return the next high and low tides."""
+        """Fetch high and low tide information and return the next high and low tides.
+
+        Arguments
+        ----------
+        latitude : float
+            Latitude of the location for which to fetch tide information.
+        longitude : float
+            Longitude of the location for which to fetch tide information.
+        start_time : str | None
+            Start time for the tide data (in ISO format).
+        end_time : str | None
+            End time for the tide data (in ISO format).
+
+        Returns
+        -------
+        tuple[tuple[str, float] | None, tuple[str, float] | None]
+            A tuple containing the next high tide (timestamp and value)
+            and the next low tide (timestamp and value). Each can be None if not found.
+
+        """
         xml_data = self._request_tide_info(
             latitude, longitude, start_time, end_time, datatype="tab"
         )
